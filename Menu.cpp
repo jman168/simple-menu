@@ -24,7 +24,7 @@ void Menu::start() {
             message = "Please select a valid option!\n";
         } else { // if valid option
             system("clear");
-            continueLoop = options[sel].start(message); // Call the option method, if it returns true, then continue
+            continueLoop = options[sel].start(message, *this); // Call the option method, if it returns true, then continue
         }
     }
 }
