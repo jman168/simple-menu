@@ -27,6 +27,7 @@ class Menu {
         T *getParameter(std::string name);
 
     private:
+        void clear();
         void printMenu();
         int getSelection();
 

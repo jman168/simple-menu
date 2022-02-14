@@ -15,7 +15,7 @@ void Menu::start() {
     bool continueLoop = true;
 
     while(continueLoop) {
-        system("clear");
+        clear();
         std::cout << message;
         printMenu();
         sel = getSelection();
@@ -23,7 +23,7 @@ void Menu::start() {
         if(sel == -1) { // if invalid selection
             message = "Please select a valid option!\n";
         } else { // if valid option
-            system("clear");
+            clear();
             message = ""; // clear the message for next option call
             continueLoop = options[sel].start(message, *this); // Call the option method, if it returns true, then continue
         }
@@ -37,6 +37,18 @@ void Menu::start() {
  */
 void Menu::addOption(MenuOption option) {
     options.push_back(option);
+}
+
+void Menu::clear() {
+    #if defined _WIN32
+    system("cls");
+    //clrscr(); // including header file : conio.h
+    #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
+        system("clear");
+        //std::cout<< u8"\033[2J\033[1;1H"; //Using ANSI Escape Sequences 
+    #elif defined (__APPLE__)
+        system("clear");
+    #endif
 }
 
 void Menu::printMenu() {
