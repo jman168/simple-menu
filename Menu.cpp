@@ -11,18 +11,20 @@ Menu::Menu() {
  * 
  */
 void Menu::start() {
-    system("clear");
-    std::cout << message;
-    printMenu();
-    int sel = getSelection();
+    int sel;
+    bool continueLoop = true;
 
-    if(sel < 0) {
-        message = "Please select a valid option!\n";
-        start();
-    } else {
+    while(continueLoop) {
         system("clear");
-        if(options[sel].start(message)) {
-            start();
+        std::cout << message;
+        printMenu();
+        sel = getSelection();
+
+        if(sel == -1) { // if invalid selection
+            message = "Please select a valid option!\n";
+        } else { // if valid option
+            system("clear");
+            continueLoop = options[sel].start(message); // Call the option method, if it returns true, then continue
         }
     }
 }
